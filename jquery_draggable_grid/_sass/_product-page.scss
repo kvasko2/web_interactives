@@ -1,0 +1,56 @@
+.product-summary {
+	@include to-rem(min-height, 20);
+	float: left;
+
+	color: $user-table-font-color;
+	@include to-rem(font-size, 0.75);
+
+	.column {
+		@include to-rem(padding-top, 1.25);
+		@include to-rem(padding-left, 1.25);
+		width: 33%;
+		height: 100%;
+		float: left;
+
+		top: 0;
+		-webkit-transform: none;
+		transform: none;
+	}
+
+	.summary-text {
+		@include to-rem(font-size, 0.75);
+		@include to-rem(margin-bottom, 1);
+	}
+
+	.product-property {
+		@include to-rem(margin-bottom, 1);
+		.property-title {
+			font-weight: bold;
+		}
+		.property-content {
+			.short-features-table {
+				th {
+					@include to-rem(font-size, 0.5);
+					text-transform: uppercase;
+					font-weight: normal;
+
+					@include to-rem(padding-right, 0.5);
+				}
+				td {
+					text-transform: capitalize;
+					@include to-rem(padding-right, 0.5);
+				}
+			}
+		}
+	}
+}
+
+.area-chart {
+	color: $overtime-widget-primary-color;
+	.c3-axis-x{
+		// Hide the tick marks
+		.tick > line {
+			stroke:#999;
+		}
+	}
+}

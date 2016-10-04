@@ -1,0 +1,172 @@
+---
+layout: default
+title: Draggable Widgets
+permalink: /interactive_grid_responsive/
+order: 1
+---
+<div class="shifted-body">
+    <div class="main-content">
+        <div class="content-header">
+            <div class="column grid-aligned-column">
+                <div class="content-title">
+                    {{ page.title }}
+                </div>
+            </div>
+            <div class="column grid-aligned-column">
+
+            </div>
+            <div class="column grid-aligned-column">
+                <!--<div class="search-box">Search</div>-->
+                <div class="add-widget">
+                    <div class="widget-text">
+                        Add Widget
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div id="widget-canvas" class="widget-grid">
+                <div class="widget" data-ss-colspan="1">
+                    <div class="front">
+                        <div class="widget-header">
+                            <div class="widget-notification"></div>
+                            <div class="widget-label">Card 1</div>
+                        </div>
+                        <div class="widget-body">
+                        </div>
+                    </div>
+                    <div class="back">
+                        <div class="widget-header">
+                            <div class="widget-notification"></div>
+                            <div class="widget-label">Card 2</div>
+                        </div>
+                        <div class="widget-body">
+                        </div>
+                    </div>
+                </div>
+                <div class="widget" data-ss-colspan="1">
+                    <div class="front">
+                        <div class="widget-header">
+                            <div class="widget-notification"></div>
+                            <div class="widget-label">Card 2</div>
+                        </div>
+                        <div class="widget-body">
+                        </div>
+                    </div>
+                    <div class="back">
+                        <div class="widget-header">
+                            <div class="widget-notification"></div>
+                            <div class="widget-label">Card 2</div>
+                        </div>
+                        <div class="widget-body">
+                        </div>
+                    </div>
+                </div>
+                <div class="widget" data-ss-colspan="1">
+                    <div class="front">
+                        <div class="widget-header">
+                            <div class="widget-notification"></div>
+                            <div class="widget-label">Card 3</div>
+                        </div>
+                        <div class="widget-body">
+                        </div>
+                    </div>
+                </div>
+                <div class="widget expandable-widget" data-ss-colspan="1">
+                    <div class="widget-header">
+                        <div class="widget-notification"></div>
+                        <div class="widget-label">Card 4</div>
+                    </div>
+                    <div class="widget-body">
+                    </div>
+                </div>
+                <div class="widget expandable-widget" data-ss-colspan="1">
+                    <div class="widget-header">
+                        <div class="widget-notification"></div>
+                        <div class="widget-label">Card 5</div>
+                    </div>
+                    <div class="widget-body">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Widget Palette Modal -->
+<div class="modal-shadow"></div>
+<div id="widget-palette-modal" class="modal">
+    <div class="close-button">
+        <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+viewBox="0 0 20 20" enable-background="new 0 0 20 20" xml:space="preserve">
+            <g>
+                <path fill="#808080" d="M19.5,20c-0.1,0-0.3,0-0.4-0.1l-19-19C0,0.7,0,0.3,0.1,0.1s0.5-0.2,0.7,0l19,19c0.2,0.2,0.2,0.5,0,0.7
+                    C19.8,20,19.6,20,19.5,20z"/>
+                <path fill="#808080" d="M0.5,20c-0.1,0-0.3,0-0.4-0.1c-0.2-0.2-0.2-0.5,0-0.7l19-19c0.2-0.2,0.5-0.2,0.7,0s0.2,0.5,0,0.7l-19,19
+                    C0.8,20,0.6,20,0.5,20z"/>
+            </g>
+        </svg>
+    </div>
+    <div class="modal-title">Drag to Add Widget</div>
+    <div id="widget-palette" class="widget-grid">
+        <div class="widget" data-ss-colspan="1">
+            <div class="front">
+                <div class="widget-header">
+                    <div class="widget-notification">
+                    </div>
+                    <div class="widget-label">Card 6</div>
+                </div>
+                <div class="widget-body">
+                    <img src="{{ "" | prepend: site.url }}" />
+                </div>
+            </div>
+        </div>
+        <div class="widget" data-ss-colspan="1">
+            <div class="front">
+                <div class="widget-header">
+                    <div class="widget-notification">
+                    </div>
+                    <div class="widget-label">Card 7</div>
+                </div>
+                <div class="widget-body table-widget">
+                    <img src="{{ "" | prepend: site.url }}" />
+                </div>
+            </div>
+        </div>
+        <div class="widget" data-ss-colspan="1">
+            <div class="front">
+                <div class="widget-header">
+                    <div class="widget-notification">
+                    </div>
+                    <div class="widget-label">Card 8</div>
+                </div>
+                <div class="widget-body table-widget">
+                    <img src="{{ "" | prepend: site.url }}" />
+                </div>
+            </div>
+        </div>
+        <div class="widget" data-ss-colspan="1">
+            <div class="front">
+                <div class="widget-header">
+                    <div class="widget-notification">
+                    </div>
+                    <div class="widget-label">Card 9</div>
+                </div>
+                <div class="widget-body table-widget">
+                    <img src="{{ "" | prepend: site.url }}" />
+                </div>
+            </div>
+        </div>
+        <div class="widget" data-ss-colspan="1">
+            <div class="front">
+                <div class="widget-header">
+                    <div class="widget-notification"></div>
+                    <div class="widget-label">Card 10</div>
+                </div>
+                <div class="widget-body table-widget">
+                    <img src="{{ "" | prepend: site.url }}" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="application/javascript" src="{{ "/js/page_interactions/dashboard-modal.js" | prepend: site.baseurl | prepend: site.url }}"></script>

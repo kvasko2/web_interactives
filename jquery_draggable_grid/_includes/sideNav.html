@@ -1,0 +1,119 @@
+<div class="side-navigation-menu collapsed">
+    
+    <!-- Title Bar -->
+    <bar class="page-list">
+        <div class="expand-collapse" onclick="collapseExpandSideNav()">
+            <div class="expand-collapse-button">
+                <svg class="open-nav" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 20 15" enable-background="new 0 0 20 15" xml:space="preserve">
+                    <g>
+                        <path class="expand-collapse-icon" d="M20,15H0v-3h20V15z M20,9H0V6h20V9z M20,3H0V0h20V3z"/>
+                    </g>
+                </svg>
+                
+                <svg  class="close-nav" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 29 15" enable-background="new 0 0 29 15" xml:space="preserve">
+                    <g>
+                        <path class="expand-collapse-icon" d="M29,15H9v-3h20V15z M29,9H9V6h20V9z M29,3H9V0h20V3z"/>
+                    </g>
+                    <polygon class="expand-collapse-icon" points="0,7.5 6,11.5 6,3.5 "/>
+                </svg>
+                <script type="application/javascript">
+                    function collapseExpandSideNav(){
+                        if ($('.side-navigation-menu').hasClass("collapsed")){
+                            $('.side-navigation-menu').removeClass("collapsed").addClass("expanded");
+                        } else {
+                            $('.side-navigation-menu').removeClass("expanded").addClass("collapsed");
+                        }
+                    }
+                </script>
+            </div>
+        </div>
+        <script type="application/javascript">
+            {% assign pages = site.pages | sort:"order" %}
+            {% for sitePage in pages %}
+                    // If the page has a title.
+                    if ("{{sitePage.title}}") {
+                        // Get the parent folder of the current page.
+                        var currentUrl = "{{page.url}}";
+                        var currentParentFolder = currentUrl.substring(1, currentUrl.indexOf('/', 1));
+                        // Get the other page's parent.
+                        var otherUrl = "{{sitePage.url}}";
+                        var otherParentFolder = otherUrl.substring(1, otherUrl.indexOf('/', 1));
+
+                        // If the other page has the same parent.
+                        if (currentParentFolder == otherParentFolder){
+                            // Create the page-link element.
+                            var pageLink = '<div class="page-link';
+                            // If the page titles are the same.
+                            if ("{{page.title}}" == "{{sitePage.title}}"){
+                                // Add the current class and close the opening tag.
+                                pageLink += ' current">';
+                                // Add the icon
+                                pageLink += '<div class="icon"><div class="icon-container"><i class="fa ' ;
+                                if ("{{sitePage.title}}" == "Dashboard"){
+                                    pageLink += 'fa-dashboard"></i>';
+                                } else if ("{{sitePage.title}}" == "Users"){
+                                    pageLink += 'fa-users"></i>';
+                                } else if ("{{sitePage.title}}" == "Orders"){
+                                    pageLink += 'fa-list"></i>';
+                                } else if ("{{sitePage.title}}" == "Customers"){
+                                    pageLink += 'fa-tags"></i>';
+                                } else if ("{{sitePage.title}}" == "Partners"){
+                                    pageLink += 'fa-building"></i>';
+                                } else if ("{{sitePage.title}}" == "Products"){
+                                    pageLink += 'fa-cubes"></i>';
+                                } else if ("{{sitePage.title}}" == "Instances"){
+                                    pageLink += 'fa-database"></i>';
+                                }
+
+                                // Close the icon container and the icon element, then add the link text.
+                                pageLink += '</div></div><div class="link-text">{{sitePage.title}}</div>';
+
+                                pageLink += '</div>';
+                            } else {
+                                // Close the page-link opening tag.
+                                pageLink += '">';
+                                // Add the anchor tag.
+                                var pageUrl = "{{ sitePage.url | prepend: site.baseurl }}";
+                                var adjustedUrl = pageUrl.replace('/'+currentParentFolder+'/', '../')+"index.html";
+                                // Customer exception.
+                                if ("{{sitePage.title}}" == "Customers"){
+                                    pageLink += '<a href="">';
+                                } else {
+                                    pageLink += '<a href='+adjustedUrl+'>';
+                                }
+                                // Add the icon
+                                pageLink += '<div class="icon"><i class="fa ' ;
+                                if ("{{sitePage.title}}" == "Dashboard"){
+                                    pageLink += 'fa-dashboard"></i>';
+                                } else if ("{{sitePage.title}}" == "Users"){
+                                    pageLink += 'fa-users"></i>';
+                                } else if ("{{sitePage.title}}" == "Orders"){
+                                    pageLink += 'fa-list"></i>';
+                                } else if ("{{sitePage.title}}" == "Customers"){
+                                    pageLink += 'fa-tags"></i>';
+                                } else if ("{{sitePage.title}}" == "Partners"){
+                                    pageLink += 'fa-building"></i>';
+                                } else if ("{{sitePage.title}}" == "Products"){
+                                    pageLink += 'fa-cubes"></i>';
+                                } else if ("{{sitePage.title}}" == "Instances"){
+                                    pageLink += 'fa-database"></i>';
+                                }
+
+                                // Close the icon element and add the link text.
+                                pageLink += '</div><div class="link-text">{{sitePage.title}}</div>';
+
+                                pageLink += '</a></div>';
+                            }
+
+                            // Create a DOM object from the text.
+                            var pageLinkElement = $.parseHTML(pageLink);
+
+                            // Append the page link to the page-list.
+                            $(".page-list").append(pageLinkElement);
+                        }
+                    }
+            {% endfor %}
+        </script>
+    </bar>
+</div>
