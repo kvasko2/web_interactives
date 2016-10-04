@@ -1,0 +1,71 @@
+---
+layout: default
+title: Card Flipping
+permalink: /card_flipping
+order: 1
+---
+<div class="shifted-body">
+    <div class="main-content">
+        <div class="content-header">
+            <div class="column grid-aligned-column">
+                <div class="content-title">
+                    {{ page.title }}
+                </div>
+            </div>
+            <div class="column grid-aligned-column">
+
+            </div>
+            <div class="column grid-aligned-column">
+                <!--<div class="search-box">Search</div>
+                <div class="add-widget">
+                    <div class="widget-text">
+                        Add Widget
+                    </div>
+                </div>-->
+            </div>
+        </div>
+        <div>
+            <div id="widget-canvas" class="widget-grid">
+                <div class="widget" data-ss-colspan="1">
+                    <div class="front">
+                        <div class="widget-header">
+                            <div class="widget-notification"></div>
+                            <div class="widget-label">Card Face Front</div>
+                            <div class="flip-button"></div>
+                        </div>
+                        <div class="widget-body"></div>
+                    </div>
+                    <div class="back">
+                        <div class="widget-header">
+                            <div class="widget-notification"></div>
+                            <div class="widget-label">Card Face Back</div>
+                            <div class="flip-button"></div>
+                        </div>
+                        <div class="widget-body table-widget"></div>
+                    </div>
+                </div>
+                <div class="widget" data-ss-colspan="1">
+                    <div class="front">
+                        <div class="widget-header">
+                            <div class="widget-notification"></div>
+                            <div class="widget-label">Card Face Front</div>
+                            <div class="flip-button"></div>
+                        </div>
+                        <div class="widget-body">
+                            <div id="line-chart-test" class="line-chart-container"></div>
+                        </div>
+                    </div>
+                    <div class="back">
+                        <div class="widget-header">
+                            <div class="widget-notification"></div>
+                            <div class="widget-label">Card Face Back</div>
+                            <div class="flip-button"></div>
+                        </div>
+                        <div class="widget-body"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="application/javascript" src="{{ "/js/page_interactions/dashboard-modal.js" | prepend: site.baseurl | prepend: site.url }}"></script>
