@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<head>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <script src="https://use.typekit.net/czk8ohm.js"></script>
+    <script>try{Typekit.load({ async: true });}catch(e){}</script>
+    <link rel="stylesheet" type="text/css" href="../css/nav.css">
+    <script src="http://code.jquery.com/jquery-2.2.1.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+    <script src="../data/paths.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/path.css">
+</head>
+<html>
+<body>
+    <div class="background">
+        <div id="outer-container">
+            <div id="container"></div>
+        </div>
+    </div>
+    <script>
+        var nodeReferences = {
+        };
+
+        var occupationIndexList = [];
+
+        for (var index in testNodes){
+            if (testNodes[index].name.length > 0){
+                nodeReferences[testNodes[index].name[0]] = index;
+            }
+
+            if (testNodes[index].class == "occupation"){
+                occupationIndexList.push(index);
+            }
+        }
+
+        var currentOccupationIndex = 0;
+
+        function createHexPoints(radius, startX, startY){
+            var hexPoints = [
+                //[Math.cos(0)*radius + startX, Math.sin(0)*radius + startY],
+                [Math.round(Math.cos(Math.PI/2)*radius*widthMultiplier + startX), Math.round(Math.sin(Math.PI/2)*radius + startY)],
+                //[Math.cos(Math.PI/3)*radius + startX, Math.sin(Math.PI/3)*radius + startY],
+                [Math.round(Math.cos(Math.PI*5/6)*radius*widthMultiplier + startX), Math.round(Math.sin(Math.PI*5/6)*radius + startY)],
+                //[Math.cos(Math.PI*2/3)*radius + startX, Math.sin(Math.PI*2/3)*radius + startY],
+                [Math.round(Math.cos(Math.PI*7/6)*radius*widthMultiplier + startX), Math.round(Math.sin(Math.PI*7/6)*radius + startY)],
+                //[Math.cos(Math.PI)*radius + startX, Math.sin(Math.PI)*radius + startY],
+                [Math.round(Math.cos(Math.PI*3/2)*radius*widthMultiplier + startX), Math.round(Math.sin(Math.PI*3/2)*radius + startY)],
+                //[Math.cos(Math.PI*4/3)*radius + startX, Math.sin(Math.PI*4/3)*radius + startY],
+                [Math.round(Math.cos(Math.PI*11/6)*radius*widthMultiplier + startX), Math.round(Math.sin(Math.PI*11/6)*radius + startY)],
+                //[Math.cos(Math.PI*5/3)*radius + startX, Math.sin(Math.PI*5/3)*radius + startY]
+                [Math.round(Math.cos(Math.PI*13/6)*radius*widthMultiplier + startX), Math.round(Math.sin(Math.PI*13/6)*radius + startY)],
+                [Math.round(Math.cos(Math.PI/2)*radius*widthMultiplier + startX), Math.round(Math.sin(Math.PI/2)*radius + startY)],
+            ];
+
+            return hexPoints;
+        }
+
+
+        var c10 = d3.scale.category10();
+        var svg = d3.select("#container")
+        .append("svg")
+        .attr("width", "100%")
+        .attr("height","100%")
+        .attr("preserveAspectRatio", "xMinYMax")
+        .attr("viewBox", "0 0 1024 768");
+
+        function buildPath(node, d){
+            d3.selectAll(".node").classed("active", false);
+            d3.selectAll("text").classed("active", false);
+            d3.selectAll(".step").classed("step", false);
+            d3.selectAll(".option").classed("option", false);
+
+            if (d.class == "occupation") {
+                // Set the occupation node's elements to be active.
+                var children = d3.select(node).node().parentNode.childNodes;
+                for (var i = 0; i < children.length; i++){
+                    d3.select(children[i]).classed("active", true);
+                }
+
+                // If there is a steps property.
+                if (d.hasOwnProperty("steps")){
+                    for (var i = 0; i < d.steps.length; i++){
+                        // Get a reference to the node.
+                        var stepsParentsChildren = d3.select(d3.selectAll(".node")[0][nodeReferences[d.steps[i]]]).node().parentNode.childNodes;
+                        for (var j = 0; j < stepsParentsChildren.length; j++){
+                            d3.select(stepsParentsChildren[j]).classed("active", true);
+                            d3.select(stepsParentsChildren[j]).classed("step", true);
+                        }
+                        // Apply the active class to this node in the path.
+                        d3.select(d3.selectAll(".node")[0][nodeReferences[d.steps[i]]]).classed("active", true);
+                    }
+                }
+
+                // If there is an options property.
+                if (d.hasOwnProperty("options")){
+                    for (var i = 0; i < d.options.length; i++){
+                        // Get a reference to the node.
+                        var optionsParentsChildren = d3.select(d3.selectAll(".node")[0][nodeReferences[d.options[i]]]).node().parentNode.childNodes;
+                        for (var j = 0; j < optionsParentsChildren.length; j++){
+                            d3.select(optionsParentsChildren[j]).classed("active", true);
+                            d3.select(optionsParentsChildren[j]).classed("option", true);
+                        }
+                        // Apply the active class to this node in the path.
+                        d3.select(d3.selectAll(".node")[0][nodeReferences[d.steps[i]]]).classed("active", true);
+                    }
+                }
+
+                // Update the current occupation index.
+                var tempIndex = testNodes.indexOf(d).toString();
+                currentOccupationIndex = occupationIndexList.indexOf(tempIndex)+1;
+                if (currentOccupationIndex >= occupationIndexList.length){
+                    currentOccupationIndex = 0;
+                }
+            }
+            else if (d.class == "step") {
+                var children = d3.select(node).node().parentNode.childNodes;
+                for (var i = 0; i < children.length; i++){
+                    d3.select(children[i]).classed("active", true);
+                }
+            } else if (d.class == "start"){
+                // Get the g element of the "current" occupation to be displayed.
+                var gElement = d3.select(node).node().parentNode.parentNode.childNodes[occupationIndexList[currentOccupationIndex]];
+                // Get the occupation node, or path element, which is the first child.
+                var occupationNode = gElement.childNodes[0];
+                // Get the node's data.
+                var nodeData = d3.select(gElement).data()[0];
+                // Build the path for the occupation node.
+                buildPath(occupationNode, nodeData);
+            } else {
+                // Set the occupation node's elements to be active.
+                var children = d3.select(node).node().parentNode.childNodes;
+                for (var i = 0; i < children.length; i++){
+                    d3.select(children[i]).classed("active", true);
+                }
+            }
+        }
+
+        var root = svg.append("g")
+                      .attr("class", "root");
+        var nodes  = root.selectAll("node")
+                        .data(testNodes)
+                        .enter()
+                        .append("g");
+
+        var circleRadius = 25;
+        for (var i = 0; i < nodes[0].length; i++){
+            // Draw the hexagons.
+            var hexPoints = createHexPoints(radius,
+                                            d3.select(nodes[0][i]).data()[0].x,
+                                            d3.select(nodes[0][i]).data()[0].y);
+
+            var lineFunction = d3.svg.line().x(function(d) {return d[0];})
+                                            .y(function(d) {return d[1];})
+                                            .interpolate("linear");
+
+            // Build the hexagons.
+            d3.select(nodes[0][i])
+               .append("path")
+               .attr("class",function(d) { return "node "+d.class; })
+               .attr("d", lineFunction(hexPoints))
+               .on("click", function(d){ buildPath(this, d); })
+               .on("tap", function(d){ buildPath(this, d); })
+               .on("touch", function(d){ buildPath(this, d); })
+
+            var nameList = d3.select(nodes[0][i]).data()[0].name;
+            var indexAdjust = -nameList.length%2;
+            if (nameList.length < 2) { indexAdjust = 0.25; }
+            else if (nameList.length == 2) { indexAdjust += -0.25; }
+            else if (nameList.length == 3) { indexAdjust += 0.25; }
+            for (var j = 0; j < nameList.length; j++){
+                d3.select(nodes[0][i]).append("text")
+                                      .attr("text-anchor", "middle")
+                                      .attr("class",function(d) {
+                                          if (d.class != ""){
+                                              return d.class;
+                                          }
+                                      })
+                                      .attr('x', function(d){ return d.x; })
+                                      .attr('y', function(d){ return d.y+((j+indexAdjust)*fontSize); })
+                                      .text(function(d){ return nameList[j]; });
+            }
+        }
+
+        $(document).ready(function(){
+            // Remove a useless loading screen jquery mobile adds to the DOM.
+            $(".ui-loader:first").remove();
+        })
+    </script>
+</body>
+</html>

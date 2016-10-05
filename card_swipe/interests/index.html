@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<head>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <script src="https://use.typekit.net/czk8ohm.js"></script>
+    <script>try{Typekit.load({ async: true });}catch(e){}</script>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <script src="http://code.jquery.com/jquery-2.2.1.min.js"></script>
+    <script>
+        $(document).bind('mobileinit',function(){
+            $.mobile.pushStateEnabled = false;
+        });
+    </script>
+    <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+
+    <style>
+        html {
+            height: 100%;
+            width: 100%;
+        }
+        body {
+            height: 100%;
+            width: 100%;
+            margin: 0;
+
+            -webkit-touch-callout: none; /* iOS Safari */
+            -webkit-user-select: none;   /* Chrome/Safari/Opera */
+            -khtml-user-select: none;    /* Konqueror */
+            -moz-user-select: none;      /* Firefox */
+            -ms-user-select: none;       /* IE/Edge */
+            user-select: none;           /* non-prefixed version, currently
+                                          not supported by any browser */
+        }
+        .ui-page {
+            height: 100% !important;
+        }
+        .background {
+            width: 100%;
+            height: 100%;
+
+            background: #000000;/* For browsers that do not support gradients */
+            background: -webkit-linear-gradient(left top, #000000, #888888); /* For Safari 5.1 to 6.0 */
+            background: -o-linear-gradient(bottom right, #000000, #888888); /* For Opera 11.1 to 12.0 */
+            background: -moz-linear-gradient(bottom right, #000000, #888888); /* For Firefox 3.6 to 15 */
+            background: linear-gradient(to bottom right, #000000, #888888);
+        }
+
+        .content {
+            width: 100%;
+            height: 575px;
+
+            position: relative;
+            top: 50%;
+            -ms-transform: translateY(-50%);
+            -webkit-transform: translateY(-50%);
+            transform: translateY(-50%);
+        }
+
+        .title {
+            width: 100%;
+            height: 75px;
+            font-size: 36px;
+            text-align:center;
+            color: white;
+
+            font-family: Lust;
+            font-style: italic;
+            letter-spacing:1px;
+        }
+
+        .sub-title {
+            width: 100%;
+
+            font-size: 20px;
+            text-align:center;
+            color: white;
+
+            font-family: proxima-nova, sans-serif;
+            font-style: italic;
+            letter-spacing:1px;
+        }
+
+        .interaction {
+            width: 100%;
+            height: 425px;
+        }
+
+        .holder {
+            z-index: 2;
+            position: relative;
+            float:left;
+            width: 25%;
+            height: 100%;
+        }
+
+        .holder img {
+            display: block;
+            position: relative;
+            top: 50%;
+            -ms-transform: translateY(-50%);
+            -webkit-transform: translateY(-50%);
+            transform: translateY(-50%);
+
+            margin: auto;
+        }
+
+        .card-stack {
+            position: relative;
+            float: left;
+            width: 50%;
+            height: 100%;
+        }
+
+        .cards {
+            position: absolute;
+        }
+
+        /* Card */
+        .card {
+            position: absolute;
+            width: 321px;
+            height: 243px;
+
+            overflow:hidden;
+        }
+
+        .card .title {
+            width: 100%;
+            height: initial;
+        }
+
+        .card .title .text {
+            width: 70%;
+            text-align:center;
+            color: white;
+            margin-top: 36px;
+            margin-left: auto;
+            margin-right: auto;
+
+            font-size:24px;
+            font-family: proxima-nova, sans-serif;
+            font-style: normal;
+            font-weight: bold;
+            text-transform: uppercase;
+
+            letter-spacing: 1px;
+            line-height: 28px;
+        }
+
+        .card .description {
+            width: 100%;
+        }
+
+        .card .description .text {
+            width: 82.5%;
+            text-align:center;
+            color: white;
+            vertical-align: text-top;
+            margin-top: 28px;
+            margin-left: auto;
+            margin-right: auto;
+
+            font-size:20px;
+            font-family: proxima-nova, sans-serif;
+            font-style: normal;
+            font-weight: bold;
+            line-height: 24px;
+            letter-spacing: 0.5px;
+        }
+
+        /* Done Card */
+        .done-card {
+            position: absolute;
+            width: 321px;
+            height: 243px;
+        }
+
+        .done-card .title {
+            width: 100%;
+            height: 35%;
+        }
+
+        .done-card .title .text {
+            width: 70%;
+            text-align:center;
+            color: white;
+            margin-top: 24px;
+            margin-left: auto;
+            margin-right: auto;
+
+            font-size:24px;
+            font-family: lust;
+            font-style: italic;
+            font-weight: normal;
+            text-transform: none;
+
+            letter-spacing: 1px;
+        }
+
+        .done-card .description {
+            width: 100%;
+            height: 65%;
+        }
+
+        .done-card .description .text {
+            width: 80%;
+            text-align:center;
+            color: white;
+            vertical-align: text-top;
+            margin-top: 12px;
+            margin-left: auto;
+            margin-right: auto;
+
+            font-size:20px;
+            font-family: proxima-nova, sans-serif;
+            font-style: normal;
+            font-weight: normal;
+        }
+
+        /* Card Shadow */
+        .card-shadow {
+            position:absolute;
+            width: 100%;
+            height: 200%;
+            top: -2px;
+            left: 72%;
+
+            background-color: rgba(0,0,0,0.15);
+
+            -ms-transform: rotateZ(-45deg); /* IE 9 */
+           	-webkit-transform: rotateZ(-45deg); /* Safari */
+            transform: rotateZ(-45deg);
+        }
+
+        /* Top Card */
+        .topCard {
+
+        }
+
+        .bottomCard {
+
+        }
+
+        .shadow {
+
+        }
+
+        .test {
+            background-color: white;
+        }
+
+        /* Counter */
+        .counter {
+            position:absolute;
+            width: 40px;
+            height: 40px;
+
+            top: 62%;
+            left: 20%;
+
+            border: 3px solid white;
+            border-radius: 40px;
+        }
+
+        .counter.trash {
+            background-color:#323232;
+            top: 62%;
+            left: 25%;
+        }
+
+        .counter.keep {
+            background-color:#646464;
+            top: 60%;
+            left: 20%;
+        }
+
+        .counter .text {
+            text-align:center;
+            font-size: 24px;
+            font-family: "proxima-nova", sans-serif;
+            color: white;
+
+            display: block;
+            position: relative;
+            top: 50%;
+            -ms-transform: translateY(-50%);
+            -webkit-transform: translateY(-50%);
+            transform: translateY(-50%);
+
+            margin: auto;
+        }
+
+        .put-in {
+            /*background-image: url("../images/keep.svg");
+            background-size: 40px 40px;
+            background-repeat: no-repeat;
+            background-position: right top;*/
+
+            -webkit-animation-name: keep; /* Chrome, Safari, Opera */
+            -webkit-animation-duration: 1s; /* Chrome, Safari, Opera */
+            -webkit-animation-timing-function: ease;
+            animation-name: keep;
+            animation-duration: 1s;
+            animation-timing-function: ease;
+        }
+
+        .throw-away {
+            /*background-image: url("../images/throw_away.svg");
+            background-size: 40px 40px;
+            background-repeat: no-repeat;
+            background-position: right top;*/
+
+            -webkit-animation-name: toss; /* Chrome, Safari, Opera */
+            -webkit-animation-duration: 1s; /* Chrome, Safari, Opera */
+            -webkit-animation-timing-function: ease;
+            animation-name: toss;
+            animation-duration: 1s;
+            animation-timing-function: ease;
+        }
+
+        @-webkit-keyframes toss {
+            from {
+                left:0px;
+                top:0px;
+                -webkit-transform: rotate(0deg) scale(1); /* Chrome 4+, Op 15+, Saf 3.1, iOS Saf 3.2+ */
+                -moz-transform: rotate(0deg) scale(1); /* Fx 3.5-15 */
+                -ms-transform: rotate(0deg) scale(1); /* IE 9 */
+                -o-transform: rotate(0deg) scale(1); /* Op 10.5-12 */
+                transform: rotate(0deg) scale(1); /* Fx 16+, IE 10+ */
+            }
+            to {
+                left:-300px;
+                top:14px;
+                -webkit-transform: rotate(-180deg) scale(0.25); /* Chrome 4+, Op 15+, Saf 3.1, iOS Saf 3.2+ */
+                -moz-transform: rotate(-180deg) scale(0.25); /* Fx 3.5-15 */
+                -ms-transform: rotate(-180deg) scale(0.25); /* IE 9 */
+                -o-transform: rotate(-180deg) scale(0.25); /* Op 10.5-12 */
+                transform: rotate(-180deg) scale(0.25); /* Fx 16+, IE 10+ */
+            }
+        }
+
+        /* Standard syntax */
+        @keyframes toss {
+            from {
+                left:0px;
+                top:0px;
+                -webkit-transform: rotate(0deg) scale(1); /* Chrome 4+, Op 15+, Saf 3.1, iOS Saf 3.2+ */
+                -moz-transform: rotate(0deg) scale(1); /* Fx 3.5-15 */
+                -ms-transform: rotate(0deg) scale(1); /* IE 9 */
+                -o-transform: rotate(0deg) scale(1); /* Op 10.5-12 */
+                transform: rotate(0deg) scale(1); /* Fx 16+, IE 10+ */
+            }
+            to {
+                left:-300px;
+                top:14px;
+                -webkit-transform: rotate(-180deg) scale(0.25); /* Chrome 4+, Op 15+, Saf 3.1, iOS Saf 3.2+ */
+                -moz-transform: rotate(-180deg) scale(0.25); /* Fx 3.5-15 */
+                -ms-transform: rotate(-180deg) scale(0.25); /* IE 9 */
+                -o-transform: rotate(-180deg) scale(0.25); /* Op 10.5-12 */
+                transform: rotate(-180deg) scale(0.25); /* Fx 16+, IE 10+ */
+            }
+        }
+
+        @-webkit-keyframes keep {
+            from {
+                left:0px;
+                top:0px;
+                -webkit-transform: rotate(0deg) scale(1); /* Chrome 4+, Op 15+, Saf 3.1, iOS Saf 3.2+ */
+                -moz-transform: rotate(0deg) scale(1); /* Fx 3.5-15 */
+                -ms-transform: rotate(0deg) scale(1); /* IE 9 */
+                -o-transform: rotate(0deg) scale(1); /* Op 10.5-12 */
+                transform: rotate(0deg) scale(1); /* Fx 16+, IE 10+ */
+            }
+            to {
+                left:450px;
+                top:14px;
+                -webkit-transform: rotate(180deg) scale(0.25); /* Chrome 4+, Op 15+, Saf 3.1, iOS Saf 3.2+ */
+                -moz-transform: rotate(180deg) scale(0.25); /* Fx 3.5-15 */
+                -ms-transform: rotate(180deg) scale(0.25); /* IE 9 */
+                -o-transform: rotate(180deg) scale(0.25); /* Op 10.5-12 */
+                transform: rotate(180deg) scale(0.25); /* Fx 16+, IE 10+ */
+            }
+        }
+
+        @keyframes keep {
+            from {
+                left:0px;
+                top:0px;
+                -webkit-transform: rotate(0deg) scale(1); /* Chrome 4+, Op 15+, Saf 3.1, iOS Saf 3.2+ */
+                -moz-transform: rotate(0deg) scale(1); /* Fx 3.5-15 */
+                -ms-transform: rotate(0deg) scale(1); /* IE 9 */
+                -o-transform: rotate(0deg) scale(1); /* Op 10.5-12 */
+                transform: rotate(0deg) scale(1); /* Fx 16+, IE 10+ */
+            }
+            to {
+                left:450px;
+                top:14px;
+                -webkit-transform: rotate(180deg) scale(0.25); /* Chrome 4+, Op 15+, Saf 3.1, iOS Saf 3.2+ */
+                -moz-transform: rotate(180deg) scale(0.25); /* Fx 3.5-15 */
+                -ms-transform: rotate(180deg) scale(0.25); /* IE 9 */
+                -o-transform: rotate(180deg) scale(0.25); /* Op 10.5-12 */
+                transform: rotate(180deg) scale(0.25); /* Fx 16+, IE 10+ */
+            }
+        }
+
+        /* Next Button */
+        .actions {
+            position:relative;
+            width: 100%;
+            /*height: 25%;*/
+        }
+        .next {
+            z-index: 2;
+            width: 136px;
+            height: 40px;
+
+            display: block;
+            position: relative;
+            top: 50%;
+            -ms-transform: translateY(-50%);
+            -webkit-transform: translateY(-50%);
+            transform: translateY(-50%);
+
+            margin: auto;
+
+            border-color: white;
+            border-style:solid;
+            border-width: 2px;
+        }
+
+        .next:hover {
+            background-color: #F3EA1D;
+            border-color: #F3EA1D;
+        }
+
+        .next .text {
+            z-index: 100;
+            height: 16px;
+
+            display: block;
+            position: relative;
+            top: 50%;
+            -ms-transform: translateY(-50%);
+            -webkit-transform: translateY(-50%);
+            transform: translateY(-50%);
+
+            margin: auto;
+
+            font-size: 12px;
+            text-transform: uppercase;
+            color:white;
+            text-align: center;
+            font-family: sans-serif;
+        }
+
+        .next:hover .text {
+            color: #5227B4;
+        }
+
+        .disabled-action-box,
+        .disabled-action-box:hover {
+            border-color:rgba(255,255,255,0.5);
+            background-color: transparent;
+        }
+
+        .next .text.disabled-text,
+        .next .text.disabled-text:hover {
+            color:rgba(255,255,255,0.5);
+        }
+    </style>
+</head>
+<html>
+<body>
+    <div class="background">
+        <div class="content">
+            <div class="title">I like to...</div>
+            <div class="sub-title">(Swipe left to discard. Swipe right to keep.)</div>
+            <div class="interaction">
+                <div class="holder trash">
+                    <img class="trashCan" src="../images/trashcan.png" />
+                    <div class="counter trash">
+                        <div class="text">0</div>
+                    </div>
+                </div>
+                <div class="card-stack">
+                    <div class="cards">
+                        <div class="shadow"></div>
+                    </div>
+                </div>
+                <div class="holder keep">
+                    <img class="folder" src="../images/folder.png" />
+                    <div class="counter keep">
+                        <div class="text">0</div>
+                    </div>
+                </div>
+            </div>
+            <div class="actions">
+                <div class="next">
+                    <div class="text">reset</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var bottomCardShadowColor = "rgba(0,0,0,0.25)";
+        var cardOffsetX = 12;
+        var cardOffsetY = 12;
+        var keepCards = {};
+        var trashCards = {};
+        var doneCardObject = {
+            title: "Great job!",
+            description: "Use the \"Reset\" button to start over."
+        };
+        var cards = {
+            "card-1": {
+                title: "Kittens",
+                description: "Little balls of fluff with needle hands.",
+                color: "#e86600"
+            },
+            "card-2": {
+                title: "Puppies",
+                description: "Adorable slobber machines with no coordination.",
+                color: "#103c9b"
+            },
+            "card-3": {
+                title: "Running",
+                description: "Land test of endurance.",
+                color: "#e89900"
+            },
+            "card-4": {
+                title: "Swimming",
+                description: "Water test of endurance.",
+                color: "#008d88"
+            },
+            "card-5": {
+                title: "Cake",
+                description: "Fluffly, often sweet, edible.",
+                color: "#e86600"
+            },
+            "card-6": {
+                title: "Pie",
+                description: "Pastry-surrounded amalgam of delicious.",
+                color: "#103c9b"
+            },
+            "card-7": {
+                title: "Board Games",
+                description: "A tale of strategy and luck.",
+                color: "#e89900"
+            },
+            "card-8": {
+                title: "Video Games",
+                description: "Like interactive movies, but so much more.",
+                color: "#008d88"
+            }
+        };
+
+        function sortCards(){
+            // Add the cards to the cards element.
+            var keys = Object.keys(cards);
+            for (var i = 0; i < keys.length; i++){
+                // Create the new card.
+                var newCard = $("<div>", {id: keys[i], class: "card"});
+                newCard.css({top: cardOffsetY*i, left: cardOffsetX*i,
+                            "background-color":cards[keys[i]].color,
+                            "z-index":(keys.length-i)});
+                newCard.attr("baseTop", cardOffsetY*i);
+                newCard.attr("baseLeft", cardOffsetX*i);
+
+                // Add the title to the card.
+                var titleDiv = $("<div>", {class: "title"});
+                var titleTextDiv = $("<div>", {class: "text"});
+                titleTextDiv.text(cards[keys[i]].title)
+                titleDiv.append(titleTextDiv);
+                newCard.append(titleDiv);
+                // Add the description to the card.
+                var descDiv = $("<div>", {class: "description"});
+                var descTextDiv = $("<div>", {class: "text"});
+                descTextDiv.html(cards[keys[i]].description);
+                descDiv.append(descTextDiv);
+                newCard.append(descDiv);
+
+                if (i > 0){
+                    // Add a shadow element.
+                    var shadowDiv = $("<div>", {class: "card-shadow"});
+                    newCard.append(shadowDiv);
+                }
+
+                // Append the new card to the cards element.
+                $(".cards").append(newCard);
+
+                // If the new card is the bottom card.
+                if (i == keys.length-1){
+                    createBoxShadow("bottomCard", newCard.offset(), newCard.width(), newCard.height());
+                    newCard.addClass("bottomCard");
+                }
+            }
+
+            // Add the done card.
+            var doneCard = $("<div>", {id: "card-done", class: "done-card"});
+            doneCard.css({top: (cardOffsetY*keys.length/2), left: (cardOffsetX*keys.length/2),
+                        "z-index":0});
+            doneCard.attr("baseTop", 0);
+            doneCard.attr("baseLeft", 0);
+
+            // Add the title to the card.
+            var titleDiv = $("<div>", {class: "title"});
+            var titleTextDiv = $("<div>", {class: "text"});
+            titleTextDiv.text(doneCardObject.title)
+            titleDiv.append(titleTextDiv);
+            doneCard.append(titleDiv);
+            // Add the description to the card.
+            var descDiv = $("<div>", {class: "description"});
+            var descTextDiv = $("<div>", {class: "text"});
+            descTextDiv.text(doneCardObject.description);
+            descDiv.append(descTextDiv);
+            doneCard.append(descDiv);
+
+            $(".cards").append(doneCard);
+
+            // Hide the done card until the last card is removed.
+            $(".done-card").hide();
+
+            // Get the parent container's width and height.
+            var parentWidth = $(".card-stack").width(),
+                parentHeight = $(".card-stack").height();
+            // Compute the width and height all cards occupy.
+            var allCardsWidth = $(".card:first").width()+(cardOffsetX*keys.length-1);
+            var allCardsHeight = $(".card:first").height()+(cardOffsetY*keys.length-1);
+
+            // Offset the cards element so it is centered.
+            var newLeft = (parentWidth - allCardsWidth)/2;
+            var newTop = (parentHeight - allCardsHeight)/2;
+            $(".cards").css({left:newLeft, top:newTop});
+        }
+
+        function checkIfDone(){
+            if ($(".cards:first").children(".card").length == 0){
+                // Show the done message.
+                // Enable the next button.
+                var nextButton = $(".next:first");
+                nextButton.removeClass("disabled-action-box");
+                nextButton.find(".text").removeClass("disabled-text");
+
+                // Show the done card.
+                $(".done-card").show();
+            }
+        }
+
+        function createBoxShadow(className, offset, width, height){
+            var startX = parseInt(offset.left);
+            var startY = parseInt(offset.top);
+            var screenH = $("body").height();
+            var screenW = $("body").width();
+            var largestLimit = screenH;
+            if (screenW > largestLimit){
+                largestLimit = screenW;
+                largestLimit -= startX+width;
+            } else {
+                largestLimit -= startY+height;
+            }
+
+            var boxShadowText = "box-shadow: ";
+            var yMultiplier = cardOffsetY/cardOffsetX;
+            for (var i = 1; i < largestLimit; i++){
+                var pointColor = computePointColor(startX+width+i, startY+width+yMultiplier*i, screenW, screenH);
+
+                boxShadowText += pointColor + " " + (i) + "px " + (yMultiplier*i) + "px, ";
+            }
+            var pointColor = computePointColor(largestLimit, yMultiplier*largestLimit, screenW, screenH);
+            boxShadowText += pointColor + " " + (largestLimit) + "px " + (yMultiplier*largestLimit) + "px;";
+
+            var sheet = document.getElementsByTagName("style")[0];//document.createElement("style");
+            //sheet.type = 'text/css';
+            sheet.innerHTML += "." + className + " { " + boxShadowText + " } ";
+            //var head = document.getElementsByTagName("head")[0].appendChild(sheet);
+        }
+
+        /** Begin Color Functions **/
+        function hexToRgb(hex){
+            hex = hex.replace('#','');
+            r = parseInt(hex.substring(0,2), 16);
+            g = parseInt(hex.substring(2,4), 16);
+            b = parseInt(hex.substring(4,6), 16);
+
+            result = {red:r, green:g, blue:b};
+            return result;
+        }
+
+        function computePointColor(x, y, screenW, screenH){
+            var percentX = x/screenW, percentY = y/screenH;
+
+            var totalPercent = (percentX + percentY)/2;
+
+            var origColor = hexToRgb("#000000");
+            var limitColor = hexToRgb("#666666");
+            var colorDiff = {
+                red: limitColor.red-origColor.red,
+                green: limitColor.green-origColor.green,
+                blue: limitColor.blue-origColor.blue
+            };
+
+            var pointColor = {
+                red: parseInt(origColor.red + (colorDiff.red*totalPercent)),
+                green: parseInt(origColor.green + (colorDiff.green*totalPercent)),
+                blue: parseInt(origColor.blue + (colorDiff.blue*totalPercent))
+            }
+
+            return "rgb("+pointColor.red+", "+pointColor.green+", "+pointColor.blue+")";
+        }
+
+        /** End Color Functions **/
+
+        $(window).resize(function(){
+            $(".cards").empty();
+            sortCards();
+        });
+
+        $(document).ready(function(){
+            // Remove a useless loading screen jquery mobile adds to the DOM.
+            $(".ui-loader:first").remove();
+
+            // Hide the counters to start.
+            $(".counter").hide();
+
+            sortCards();
+
+            // Give the first card the "top" class.
+            $(".card:first").addClass("topCard");
+
+            // Disable the next button.
+            var nextButton = $(".next:first");
+            nextButton.addClass("disabled-action-box");
+            nextButton.find(".text").addClass("disabled-text");
+
+            // Next listener.
+            $(".next:first").on("touch click", function(e){
+                if (!$(this).hasClass("disabled-action-box")){
+                    localStorage.setItem("keepCards", JSON.stringify(keepCards));
+                    location.reload();
+                }
+            });
+
+            // Swipe left listener.
+            $(".card-stack").on("swipeleft", function(e){
+                // Add the put-in animation class and remove the topCard class from the top card.
+                $(".topCard").removeClass("bottomCard").removeClass("topCard").addClass("throw-away");
+                // Set the next card without any animations to the top card.
+                $(".card").each(function(){
+                    if (!$(this).hasClass("put-in") && !$(this).hasClass("throw-away")){
+                        // Remove the shadow element.
+                        $(this).find(".card-shadow").remove();
+                        // Set this card as the new top card.
+                        $(this).addClass("topCard");
+                        // Break out of the each loop.
+                        return false;
+                    }
+                });
+            });
+
+            // Swipe right listener.
+            $(".card-stack").on("swiperight", function(e){
+                // Add the put-in animation class and remove the topCard class from the top card.
+                $(".topCard").removeClass("bottomCard").removeClass("topCard").addClass("put-in");
+                // Set the next card without any animations to the top card.
+                $(".card").each(function(){
+                    if (!$(this).hasClass("put-in") && !$(this).hasClass("throw-away")){
+                        // Remove the shadow element.
+                        $(this).find(".card-shadow").remove();
+                        // Set this card as the new top card.
+                        $(this).addClass("topCard");
+                        // Break out of the each loop.
+                        return false;
+                    }
+                });
+            });
+
+            // On animation end.
+            $(".card").on('animationend webkitAnimationEnd oAnimationEnd mozAnimationEnd', function(e){
+                if ($(this).hasClass("put-in")) {
+                    // Add the card to the keepCards object.
+                    keepCards[$(this).attr("id")] = cards[$(this).attr("id")];
+                    // Remove the card from the DOM.
+                    $(this).remove();
+
+                    // Update the folder's counter.
+                    var keepCounter = $(".keep:first").find('.counter');
+                    keepCounter.show();
+                    keepCounter.find('.text').text(Object.keys(keepCards).length);
+                } else if ($(this).hasClass("throw-away")) {
+                    // Add the card to the trashCards object.
+                    trashCards[$(this).attr("id")] = cards[$(this).attr("id")];
+                    // Remove the card from the DOM.
+                    $(this).remove();
+
+                    // Update the trash's counter.
+                    var trashCounter = $(".trash:first").find('.counter');
+                    trashCounter.show();
+                    trashCounter.find('.text').text(Object.keys(trashCards).length);
+                }
+
+                checkIfDone();
+
+                isAnimating = false;
+            });
+        });
+    </script>
+</body>
+</html>

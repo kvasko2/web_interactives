@@ -1,0 +1,803 @@
+html {
+    height: 100%;
+}
+body {
+    height: 100%;
+    margin: 0;
+
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none;   /* Chrome/Safari/Opera */
+    -khtml-user-select: none;    /* Konqueror */
+    -moz-user-select: none;      /* Firefox */
+    -ms-user-select: none;       /* IE/Edge */
+    user-select: none;           /* non-prefixed version, currently
+                                  not supported by any browser */
+}
+
+.ui-page {
+    height:100%;
+    width:100%;
+}
+.background {
+    width: 100%;
+    height: 100%;
+
+    background: #000000;/* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(left top, #000000, #888888); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(bottom right, #000000, #888888); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(bottom right, #000000, #888888); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(to bottom right, #000000, #888888);
+
+    overflow-y: scroll;
+}
+
+/*.background.shifted {
+    left:-20%;
+}*/
+
+#outer-container {
+    perspective: 400px;
+    perspective-origin: 50% 10%;
+
+    -webkit-transition: 0.3s ease-out;
+       -moz-transition: 0.3s ease-out;
+         -o-transition: 0.3s ease-out;
+            transition: 0.3s ease-out;
+
+    width: 100%;
+    height: 75%;
+}
+#outer-container.shifted {
+    /*-ms-transform: translateX(-20%);
+    -webkit-transform: translateX(-20%);
+    transform: translateX(-20%);*/
+    -ms-transform: translateX(-150px);
+    -webkit-transform: translateX(-150px);
+    transform: translateX(-150px);
+}
+#container {
+    -ms-transform: rotateX(15deg);
+    -webkit-transform: rotateX(15deg);
+    transform: rotateX(15deg);
+}
+#container svg {
+    display:block;
+    margin: auto;
+    overflow: visible;
+}
+
+.node {
+    fill: white;
+    stroke: none;
+}
+
+.node.active {
+    fill: #e86600;
+}
+
+.start {
+    fill:#e86600;
+}
+
+.step {
+}
+
+.occupation {
+}
+
+.occupation.active {
+    /*fill: #1799FF;*/
+}
+
+.step.active {
+    fill: #ff9442;
+}
+
+.option.active {
+    fill: #ff9442;
+}
+
+text {
+    fill:#000000;
+
+    font-size: 14px;
+    font-family: "proxima-nova", sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    pointer-events:none;
+
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none;   /* Chrome/Safari/Opera */
+    -khtml-user-select: none;    /* Konqueror */
+    -moz-user-select: none;      /* Firefox */
+    -ms-user-select: none;       /* IE/Edge */
+    user-select: none;           /* non-prefixed version, currently
+                                  not supported by any browser */
+}
+
+text.future {
+    fill: white;
+}
+
+text.active {
+    fill: white;
+}
+
+text.occupation {
+    fill: blue;
+}
+
+text.active.occupation {
+    fill: white;
+}
+
+text.active.step {
+    fill: white;
+}
+
+text.active.option {
+    fill: white;
+}
+
+text.start {
+    fill: white;
+}
+
+.modal.right .modal-dialog {
+    position: fixed;
+    margin: auto;
+    /*width: 33%;*/
+    width: 340px;
+    height: 100%;
+    -webkit-transform: translate3d(0%, 0, 0);
+        -ms-transform: translate3d(0%, 0, 0);
+         -o-transform: translate3d(0%, 0, 0);
+            transform: translate3d(0%, 0, 0);
+}
+
+.modal.right .modal-content {
+    height: 100%;
+    overflow-y: auto;
+}
+
+.modal.right .modal-body {
+    height: 100%;
+    width: 100%
+    padding: 15px 15px 80px;
+
+    background: #5227B4;/* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(#A72ABB, #5227B4); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#A72ABB, #5227B4); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#A72ABB, #5227B4); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#A72ABB, #5227B4);
+
+    overflow-y: scroll;
+}
+
+.modal.right.fade .modal-dialog {
+    /*right: -33%;*/
+    right: -340px;
+    -webkit-transition: opacity 0.3s linear, right 0.3s ease-out, width 0.3s ease-out;
+       -moz-transition: opacity 0.3s linear, right 0.3s ease-out, width 0.3s ease-out;
+         -o-transition: opacity 0.3s linear, right 0.3s ease-out, width 0.3s ease-out;
+            transition: opacity 0.3s linear, right 0.3s ease-out, width 0.3s ease-out;
+}
+
+.modal.right.fade.in .modal-dialog {
+    right: 0;
+}
+
+.modal-body .sidebar-content {
+    height: 100%;
+    width: 100%;
+
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.modal-body .close-button {
+    float: right;
+    background-repeat: no-repeat;
+    background-image: url("../images/close-button.png");
+    width: 31px;
+    height: 31px;
+}
+
+.modal-body .close-button:hover {
+    background-image: url("../images/close-button_hover.png");
+}
+
+.modal-body .title {
+    width: 100%;
+    font-size: 36px;
+    text-align:center;
+    color: white;
+
+    font-family: Lust;
+    font-style: italic;
+
+    float:left;
+
+    letter-spacing: 1px;
+    line-height: 48px;
+}
+
+.modal-body .cycle {
+    float: left;
+    width: 100%;
+    height: 75px;
+}
+
+.cycle .arrow {
+    float:left;
+    width: 4%;
+    height: 100%;
+}
+.cycle .arrow img {
+    display: block;
+    position: relative;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+
+    margin: auto;
+}
+.cycle .name {
+    float:left;
+    width: 92%;
+    height: 100%;
+}
+
+.cycle .name .text {
+    display: block;
+    position: relative;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+
+    margin: auto;
+
+    font-size: 24px;
+    font-family: "proxima-nova", sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    color: #F3EA1D;
+    text-align:center;
+    text-transform: uppercase;
+
+    line-height: 24px;
+    letter-spacing: 1px;
+}
+
+.cycle .name .text:hover {
+    color: #50E3C2;
+}
+
+.modal-body .requirements,
+.modal-body .demand {
+    float:left;
+    width: 100%;
+
+    font-size: 14px;
+    font-family: "proxima-nova", sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    color: white;
+    text-align:center;
+    letter-spacing: 1px;
+}
+
+.modal-body .demand .percent-change {
+    font-weight: bold;
+}
+
+.modal-body .videos {
+    float:left;
+    height: 60%;
+    width:100%;
+    padding-top: 18px;
+}
+
+.videos .video-container {
+    margin-left: auto;
+    margin-right: auto;
+    width:75%;
+    /*padding-bottom: 18px;*/
+}
+
+.videos .video {
+    height: 50%;
+    width: 100%;
+}
+
+.videos .video-container .video {
+    width: 90%;
+    margin-left: 5%;
+    height: 78%;
+    margin-top: 12px;
+    margin-bottom: 6px;
+}
+.videos .video-container .name {
+    width: 100%;
+    height: 22%;
+
+    font-size: 18px;
+    text-align:center;
+    color: white;
+
+    font-family: "proxima-nova", sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    letter-spacing: 1px;
+}
+
+.modal-dialog {
+    height: 80%;
+    width: 80%;
+}
+
+.modal .modal-dialog .modal-content {
+    background-color: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+
+    display: block;
+    position: relative;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+.modal .modal-dialog .modal-content .modal-body iframe {
+    display:block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#video-modal {
+    z-index: 1070;
+}
+
+.modal.bottom .modal-content {
+    height: 100%;
+    overflow-y: auto;
+}
+
+.modal.bottom .modal-body {
+    height: 100%;
+    width: 100%
+
+    background: #5227B4;/* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(#A72ABB, #5227B4); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#A72ABB, #5227B4); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#A72ABB, #5227B4); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#A72ABB, #5227B4);
+
+    overflow-y: scroll;
+}
+
+.modal.bottom .modal-dialog {
+    position: fixed;
+    margin: auto;
+    /*width: 33%;*/
+    width: 100%;
+    height: 100%;
+    -webkit-transform: translate3d(0%, 0, 0);
+        -ms-transform: translate3d(0%, 0, 0);
+         -o-transform: translate3d(0%, 0, 0);
+            transform: translate3d(0%, 0, 0);
+}
+
+.modal.bottom.fade .modal-dialog {
+    top: 100%;
+    -webkit-transition: opacity 0.3s linear, top 0.3s ease-out;
+       -moz-transition: opacity 0.3s linear, top 0.3s ease-out;
+         -o-transition: opacity 0.3s linear, top 0.3s ease-out;
+            transition: opacity 0.3s linear, top 0.3s ease-out;
+}
+
+.modal.bottom.fade.in .modal-dialog {
+    top: 0;
+}
+
+.fullbar-content {
+    width: 100%;
+    height: 100%;
+
+    margin: auto;
+}
+
+.fullbar-content .title {
+    width: 100%;
+    font-size: 36px;
+    text-align:center;
+    color: white;
+
+    font-family: Lust;
+    font-style: italic;
+
+    letter-spacing: 1px;
+
+    margin-bottom: 18px;
+}
+
+.fullbar-content .subject {
+    margin: auto;
+
+    width: 100%;
+    margin-bottom: 18px;
+
+    float:left;
+}
+
+.fullbar-content .subject .heading {
+    width: 100%;
+    padding-bottom: 32px;
+}
+
+.fullbar-content .occupation-title {
+    height: 50%;
+    font-size: 24px;
+    color: #F3EA1D;
+    font-family: "proxima-nova", sans-serif;
+    font-weight: bold;
+    font-style: normal;
+    text-transform: uppercase;
+    text-align:center;
+    letter-spacing: 1px;
+}
+
+.fullbar-content .arrow {
+    display: block;
+    position: relative;
+    top: 70%;
+    -ms-transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+
+    margin: auto;
+
+    font-size: 3em;
+    color: white;
+
+    width: 4%;
+}
+
+.fullbar-content .arrow.left {
+    float:left;
+    margin-left: 2%;
+}
+.fullbar-content .arrow.right {
+    float:right;
+    margin-right: 2%;
+}
+
+.fullbar-content .occupation-demand {
+    height: 50%;
+    width: 100%;
+
+    font-size: 14px;
+    color: white;
+    font-family: "proxima-nova", sans-serif;
+    font-weight: normal;
+    font-style: normal;
+    text-align:center;
+    letter-spacing: 1px;
+}
+
+.fullbar-content .examples {
+    width: 100%;
+    height:250px;
+}
+
+.fullbar-content .column {
+    position:relative;
+    float:left;
+    height:100%;
+    width: 20%;
+    margin-left: 1%;
+    margin-right: 1%
+}
+
+.fullbar-content .video {
+    width: 188px;
+    height: 170px;
+}
+
+.fullbar-content .column .name {
+    width: 100%;
+    height: 22%;
+
+    font-size: 18px;
+    text-align:center;
+    color: white;
+
+    font-family: "proxima-nova", sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    letter-spacing: 1px;
+}
+
+.fullbar-content .column .name .text {
+    display: block;
+    position: relative;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+
+    margin: auto;
+}
+
+.fullbar-content .data-module {
+    width: 100%;
+    /*height: 44%;*/
+
+    margin: auto;
+}
+
+.fullbar-content .container {
+    width: 45%;
+    height: 335px;
+    float: left;
+    margin-left:2.5%;
+    margin-right:2.5%;
+
+    border-style:solid;
+    border-color: rgba(0, 0, 0, 0.04);
+
+    display: block;
+    position: relative;
+
+    margin-bottom: 4%;
+
+    padding-bottom: 40px;
+}
+
+.fullbar-content .container .title {
+    width: 100%;
+    font-size: 18px;
+    font-family: "proxima-nova", sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    color: white;
+    text-align: center;
+    text-transform: uppercase;
+
+    margin-top: 4%;
+    margin-bottom: 24px;
+    letter-spacing: 1px;
+    line-height: 24px;
+}
+
+.fullbar-content .container.eduCost .title{
+    width: 90%;
+    margin-left: 5%;
+}
+
+.fullbar-content .container img {
+    width: 100%;
+    height: 85%;
+}
+
+.fullbar-content .container img.demand {
+    height: 85%;
+}
+
+.fullbar-content .about .desc {
+    width: 94%;
+    /* height: 83%; */
+    font-size: 14px;
+    font-family: "proxima-nova", sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    color: white;
+    /* letter-spacing: 1px; */
+    line-height: 20px;
+}
+
+.fullbar-content .edu .main {
+    font-size: 48px;
+    font-family: "proxima-nova", sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    text-align: center;
+    line-height: 100%;
+    color: #F3EA1D;
+    letter-spacing: 1px;
+
+    display: block;
+    position: relative;
+    top: 35%;
+    -ms-transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+
+    margin: auto;
+}
+
+.fullbar-content .edu .sub {
+    font-size: 14px;
+    font-family: "proxima-nova", sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    color: white;
+
+    position: absolute;
+    bottom: 12px;
+    letter-spacing: 1px;
+}
+
+.fullbar-content .eduCost .main {
+    font-size: 48px;
+    font-family: "proxima-nova", sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    text-align: center;
+    letter-spacing: 1px;
+    margin-top:5%;
+    margin-bottom:5%;
+    color: #F3EA1D;
+    height: 50%;
+}
+
+.fullbar-content .eduCost .main .text {
+    width: 100%;
+    display: block;
+    position: relative;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+
+    margin: auto;
+}
+
+.fullbar-content .eduCost .sub {
+    width: 100%;
+    font-size: 12px;
+    color: #F3EA1D;
+
+    display: block;
+    position: relative;
+    top: 10%;
+    -ms-transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+
+    margin: auto;
+}
+
+.fullbar-content .program-list {
+    height:75%;
+}
+
+.fullbar-content .list {
+    display:inline-block;
+}
+
+.fullbar-content .program-rank {
+    display: inline-block;
+    color: #F3EA1D;
+    font-size: 17px;
+    font-family: "proxima-nova", sans-serif;
+    height: 10%;
+    width: 100%;
+    padding-bottom: 0.75em;
+    letter-spacing: 1px;
+}
+
+.fullbar-content .program-rank .rank {
+    display: block;
+    float: left;
+
+    font-weight: bold;
+}
+
+.fullbar-content .program-rank .name {
+    display: block;
+    float: left;
+
+    padding-left: 12px;
+    padding-bottom: 14px;
+}
+
+.fullbar-content .programs .sub {
+    font-size: 12px;
+    font-family: "proxima-nova" sans-serif;
+    font-weight: normal;
+    font-style: italic;
+    color: white;
+
+    position: absolute;
+    bottom: 12px;
+    letter-spacing: 1px;
+}
+
+.fullbar-content .container.expanded {
+    height: 492px;
+}
+
+.fullbar-content .container.expanded svg {
+    -ms-transform: translateY(-17%);
+    -webkit-transform: translateY(-17%);
+    transform: translateY(-17%);
+}
+
+.fullbar-content .container.expanded .similar-jobs {
+    margin-top: -10%;
+    width: 90%;
+    margin-left: 5%;
+}
+
+.similar-jobs div {
+    font-family: "proxima-nova", sans-serif;
+    font-weight: normal;
+    font-style: normal;
+    font-size: 17px;
+    color: white;
+    letter-spacing: 1px;
+}
+
+.similar-jobs .similar-job-name {
+    color: #F3EA1D;
+}
+
+.similar-jobs .similar-job-name:hover {
+    color: #50E3C2;
+}
+
+text.bubble-text {
+    fill: #5B06A7;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-family: "proxima-nova", sans-serif;
+    text-anchor: middle;
+    letter-spacing: 1px;
+}
+
+#center-panel {
+    background-color: #8529B9;
+    width: 321px;
+    height: 331px;
+    margin: auto;
+}
+
+#center-panel .modal-dialog {
+    width: 100%;
+}
+
+.modal-body .attention {
+    width: 90%;
+    margin-left:5%;
+    font-size: 36px;
+    text-align:center;
+    color: white;
+
+    font-family: Lust;
+    font-style: italic;
+
+    float:left;
+
+    letter-spacing: 1px;
+    margin-bottom: 16px;
+}
+
+.modal-body .description {
+    width: 90%;
+    margin-left: 5%;
+    font-size: 14px;
+    text-align: center;
+    color: white;
+
+    font-family: proxima-nova, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+
+    float:left;
+}
