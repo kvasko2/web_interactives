@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Flipping Some Dots</title>
+        <link rel="stylesheet" href="css/flipdots.css">
+        <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <div class="grid square25">
+        </div>
+        <div class="cam"></div>
+        <script>
+            function buildFlipdot(){
+                let cell = $("<div>", {class:"cell mini"});
+                let flipDot = $("<div>", {class:"flip-dot", "delayover":true});
+                let front = $("<div>", {class:"face front"});
+                let back = $("<div>", {class:"face back"});
+                flipDot.append(front);
+                flipDot.append(back);
+                cell.append(flipDot);
+
+                return cell;
+            }
+
+            function buildFlipdotDisplay(){
+                let grid = $(".grid");
+                let numDots = 625;
+                for (var i = 0; i < numDots; i++){
+                    let newFlipdot = buildFlipdot();
+                    grid.append(newFlipdot);
+                }
+            }
+
+            $(document).ready(function() {
+                var dragging = false;
+                $("body").on('mousedown', function(){
+                    dragging = true;
+                }).on('mouseup', function(){
+                    dragging = false;
+                });
+
+                buildFlipdotDisplay();
+
+                $(".flip-dot").on("mouseenter", function(){
+                    if (dragging){
+                        let thisDot = $(this);
+                        if (thisDot.attr("delayover") === "true"){
+                            thisDot.attr("delayover", false);
+
+                            if (thisDot.hasClass("front")){
+                                thisDot.removeClass("front").addClass("back");
+                            } else if (thisDot.hasClass("back")) {
+                                thisDot.removeClass("back").addClass("front");
+                            } else {
+                                thisDot.addClass("back");
+                            }
+
+                            setTimeout(function(){ thisDot.attr("delayover", true); }, 125);
+                        }
+                    }
+                });
+
+
+            });
+        </script>
+    </body>
+</html>

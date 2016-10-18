@@ -1,0 +1,157 @@
+.grid {
+    width: 17.5rem;
+    height: 17.5rem;
+}
+
+.grid.square25 {
+    width: 25rem;
+    height: 25rem;
+}
+
+.cell {
+    width: 1.75rem;
+    height: 1.75rem;
+    background-color: black;
+    position: relative;
+    float:left;
+}
+
+.cell.mini {
+    width: 1rem;
+    height: 1rem;
+}
+
+.flip-dot {
+    width: 95%;
+    height: 95%;
+    margin-left: 2.5%;
+    margin-top: 2.5%;
+
+    position: absolute;
+
+    /** Animation settings **/
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    /** Animation Settings **/
+
+    /*-webkit-transition-duration: 0.25s;
+    transition-duration: 0.25s;
+    -ms-transform: rotateY(0deg);
+    -webkit-transform: rotateY(0deg);
+    transform: rotateY(0deg);*/
+}
+
+.flip-dot .face {
+    width: 100%;
+    height: 100%;
+
+    border-radius: 50%;
+
+    position: absolute;
+
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
+.flip-dot .face.front {
+    background-color: #333;
+    /* Starting rotation about the Y-axis.*/
+    -ms-transform: rotateY(0deg); /* IE 9 */
+    -webkit-transform: rotateY(0deg); /* Chrome, Safari, Opera */
+    transform: rotateY(0deg);
+}
+
+.flip-dot .face.back {
+    background-color: white;
+
+    /* Starting rotation about the Y-axis. */
+    -ms-transform: rotateY(180deg); /* IE 9 */
+    -webkit-transform: rotateY(180deg); /* Chrome, Safari, Opera */
+    transform: rotateY(180deg);
+}
+
+.flip-dot.front {
+    -webkit-animation-name: to-front;
+    -webkit-animation-duration: 125ms;
+    -webkit-animation-iteration-count: 1;
+    -webkit-animation-timing-function: linear;
+    -moz-animation-name: to-front;
+    -moz-animation-duration: 125ms;
+    -moz-animation-iteration-count: 1;
+    -moz-animation-timing-function: linear;
+    -ms-animation-name: to-front;
+    -ms-animation-duration: 125ms;
+    -ms-animation-iteration-count: 1;
+    -ms-animation-timing-function: linear;
+
+    animation-name: to-front;
+    animation-duration: 125ms;
+    animation-iteration-count: 1;
+    animation-timing-function: linear;
+
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+}
+
+.flip-dot.back {
+    -webkit-animation-name: to-back;
+    -webkit-animation-duration: 125ms;
+    -webkit-animation-iteration-count: 1;
+    -webkit-animation-timing-function: linear;
+    -moz-animation-name: to-back;
+    -moz-animation-duration: 125ms;
+    -moz-animation-iteration-count: 1;
+    -moz-animation-timing-function: linear;
+    -ms-animation-name: to-back;
+    -ms-animation-duration: 125ms;
+    -ms-animation-iteration-count: 1;
+    -ms-animation-timing-function: linear;
+
+    animation-name: to-back;
+    animation-duration: 125ms;
+    animation-iteration-count: 1;
+    animation-timing-function: linear;
+
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+
+    /*background-color: white;
+    -webkit-transform: rotateY(180deg);
+    transform: rotateY(180deg);*/
+}
+
+@-ms-keyframes to-back {
+    from { -ms-transform: rotateY(0deg); }
+    to { -ms-transform: rotateY(180deg); }
+}
+@-moz-keyframes to-back {
+    from { -moz-transform: rotateY(0deg); }
+    to { -moz-transform: rotateY(180deg); }
+}
+@-webkit-keyframes to-back {
+    from { -webkit-transform: rotateY(0deg); }
+    to { -webkit-transform: rotateY(180deg); }
+}
+
+@keyframes to-back {
+    from { transform:rotateY(0deg); }
+    to { transform:rotateY(180deg); }
+}
+
+@-ms-keyframes to-front {
+    from { -ms-transform: rotateY(180deg); }
+    to { -ms-transform: rotateY(360deg); }
+}
+@-moz-keyframes to-front {
+    from { -moz-transform: rotateY(180deg); }
+    to { -moz-transform: rotateY(360deg); }
+}
+@-webkit-keyframes to-front {
+    from { -webkit-transform: rotateY(180deg); }
+    to { -webkit-transform: rotateY(360deg); }
+}
+
+@keyframes to-front {
+    from { transform:rotateY(180deg); }
+    to { transform:rotateY(360deg); }
+}
