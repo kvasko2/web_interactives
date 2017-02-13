@@ -1,15 +1,39 @@
----
-layout: default
-title: Draggable Widgets
-permalink: /interactive_grid_desktop/
-order: 2
----
-<div class="shifted-body">
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Draggable Widgets</title>
+    <meta name="description" content="Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
+">
+
+    <link rel="stylesheet" href="../css/normalize.css">
+    <link rel="stylesheet" href="../css/font-awesome.min.css">
+    <link rel="stylesheet" href="../css/main.css">
+    <script type="application/javascript" src="../js/vendor/jquery.min.js"></script>
+    <script type="application/javascript" src="../js/vendor/bootstrap.min.js"></script>
+    <!-- jQuery UI -->
+    <script type="application/javascript" src="../js/vendor/jquery-ui.min.js"></script>
+
+    <!-- jQuery Touch Punch - Enable Touch Drag and Drop -->
+    <script type="application/javascript" src="../js/vendor/shapeshift/vendor/jquery.touch-punch.min.js"></script>
+    <!-- Shapeshift -->
+    <script type="application/javascript" src="../js/vendor/shapeshift/jquery.shapeshift.js"></script>
+</head>
+
+
+  <body>
+
+    <div class="page-body">
+        <div class="shifted-body">
     <div class="main-content desktop">
         <div class="content-header">
             <div class="column grid-aligned-column">
                 <div class="content-title">
-                    {{ page.title }}
+                    Draggable Widgets
                 </div>
             </div>
             <div class="column grid-aligned-column">
@@ -116,7 +140,6 @@ viewBox="0 0 20 20" enable-background="new 0 0 20 20" xml:space="preserve">
                     <div class="widget-label">Card 6</div>
                 </div>
                 <div class="widget-body">
-                    <img src="{{ "" | prepend: site.url }}" />
                 </div>
             </div>
         </div>
@@ -128,7 +151,6 @@ viewBox="0 0 20 20" enable-background="new 0 0 20 20" xml:space="preserve">
                     <div class="widget-label">Card 7</div>
                 </div>
                 <div class="widget-body table-widget">
-                    <img src="{{ "" | prepend: site.url }}" />
                 </div>
             </div>
         </div>
@@ -140,7 +162,6 @@ viewBox="0 0 20 20" enable-background="new 0 0 20 20" xml:space="preserve">
                     <div class="widget-label">Card 8</div>
                 </div>
                 <div class="widget-body table-widget">
-                    <img src="{{ "" | prepend: site.url }}" />
                 </div>
             </div>
         </div>
@@ -152,7 +173,6 @@ viewBox="0 0 20 20" enable-background="new 0 0 20 20" xml:space="preserve">
                     <div class="widget-label">Card 9</div>
                 </div>
                 <div class="widget-body table-widget">
-                    <img src="{{ "" | prepend: site.url }}" />
                 </div>
             </div>
         </div>
@@ -164,10 +184,15 @@ viewBox="0 0 20 20" enable-background="new 0 0 20 20" xml:space="preserve">
                     <div class="widget-label">Card 10</div>
                 </div>
                 <div class="widget-body table-widget">
-                    <img src="{{ "" | prepend: site.url }}" />
                 </div>
             </div>
         </div>
     </div>
 </div>
-<script type="application/javascript" src="{{ "/js/page_interactions/dashboard-modal-desktop.js" | prepend: site.baseurl | prepend: site.url }}"></script>
+<script type="application/javascript" src="../js/page_interactions/dashboard-modal-desktop.js"></script>
+
+    </div>
+
+  </body>
+
+</html>

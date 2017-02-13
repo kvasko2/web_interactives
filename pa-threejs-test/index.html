@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <style>
+        </style>
+        <script src="//d3js.org/d3.v3.min.js" charset="utf-8"></script>
+        <script src="//d3js.org/topojson.v1.min.js"></script>
+    </head>
+    <body>
+        <script>
+            // Basic svg setup.
+            var width = 800, height = 600;
+            var svg = d3.select("body")
+                        .append('svg')
+                        .attr("width", width)
+                        .attr("height", height);
+            // Load the geometry.
+            d3.json('pgh_hoods.json', function(error, pgh){
+                if (error){
+                    return console.error(error);
+                }
+
+                var features = topojson.feature(pgh, pgh.objects.Pittsburgh_Neighborhoods);
+                console.log("features: ", features);
+
+                var projection = d3.geo.mercator()
+                                   .scale(50)
+                                   /*.translate([width/2, height/2])*/;
+                var path = d3.geo.path()
+                             .projection(projection);
+
+
+                svg.append("path")
+                   .datum(features)
+                   .attr('d', path);
+            });
+        </script>
+    </body>
+</html>
